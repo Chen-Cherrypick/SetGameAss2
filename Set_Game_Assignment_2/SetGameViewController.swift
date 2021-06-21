@@ -10,6 +10,8 @@ import UIKit
 class SetGameViewController: UIViewController {
 
 
-
+    @IBAction func CardButton(_ sender: UIButton) {
+    }
+    
 }
 
