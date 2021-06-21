@@ -13,7 +13,6 @@
 		CDD4493F2680C94000C150CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD4493D2680C94000C150CF /* Main.storyboard */; };
 		CDD449412680C94100C150CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD449402680C94100C150CF /* Assets.xcassets */; };
 		CDD449442680C94100C150CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD449422680C94100C150CF /* LaunchScreen.storyboard */; };
-		CDD4494C2680CE0900C150CF /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD4494B2680CE0900C150CF /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		CDD449402680C94100C150CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD449432680C94100C150CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD449452680C94100C150CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CDD4494B2680CE0900C150CF /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +59,6 @@
 				CDD449372680C94000C150CF /* AppDelegate.swift */,
 				CDD449392680C94000C150CF /* SceneDelegate.swift */,
 				CDD4493B2680C94000C150CF /* SetGameViewController.swift */,
-				CDD4494B2680CE0900C150CF /* File.swift */,
 				CDD4493D2680C94000C150CF /* Main.storyboard */,
 				CDD449402680C94100C150CF /* Assets.xcassets */,
 				CDD449422680C94100C150CF /* LaunchScreen.storyboard */,
@@ -141,7 +138,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD4493C2680C94000C150CF /* SetGameViewController.swift in Sources */,
-				CDD4494C2680CE0900C150CF /* File.swift in Sources */,
 				CDD449382680C94000C150CF /* AppDelegate.swift in Sources */,
 				CDD4493A2680C94000C150CF /* SceneDelegate.swift in Sources */,
 			);
