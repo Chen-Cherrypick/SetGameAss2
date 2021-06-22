@@ -14,6 +14,8 @@ class SetGame{
     var cardsInGame = [Card]()
     var selectedCards = [Card]()
     
+    var possibleSet = [[Card]]()
+    
     
     
     private func generateCardsCombination() {
@@ -37,11 +39,14 @@ class SetGame{
         selectedCards.removeAll()
         generateCardsCombination()
         addCards(numberOfCardsToAdd: 12)
+        findPossibleSetsInGame()
         
     }
     
     func addThreeCards() {
-        score -= 1
+        if(possibleSet.count>0){
+            score -= 3
+        }
         addCards(numberOfCardsToAdd: 3)
     }
     
@@ -54,21 +59,22 @@ class SetGame{
     }
     
     func selectCard(card: Card) {
-        if selectedCards.count == 3 && isSet() {
+        if selectedCards.count == 3 && SelectedSet() {
             for card in selectedCards {
                 if let cardIndex = cardsInGame.firstIndex(of: card) {
                     cardsInGame.remove(at: cardIndex)
-                    if cardsDeck.count > 0 {
+                    if cardsInGame.count < 12 && cardsDeck.count > 0 {
                         let randomIndex = cardsDeck.count.arc4random
                         let randomCard = cardsDeck.remove(at: randomIndex)
                         cardsInGame.insert(randomCard, at: cardIndex)
+                        findPossibleSetsInGame()
                     }
                 }
                 
             }
             score += 5
             selectedCards.removeAll()
-        } else if selectedCards.count == 3 && !isSet() {
+        } else if selectedCards.count == 3 && !SelectedSet() {
             score -= 5
             selectedCards.removeAll()
         }
@@ -84,16 +90,20 @@ class SetGame{
     }
     
     
-    func isSet() -> Bool {
-        if selectedCards.count != 3 {
+    func isSet(threeCards cards: [Card]) -> Bool {
+        if cards.count != 3 {
             return false
         }
-        let checkColor = checkFeature(card1Prop: selectedCards[0].color.rawValue, card2Props: selectedCards[1].color.rawValue, card3Props: selectedCards[2].color.rawValue)
-        let checkNumber = checkFeature(card1Prop: selectedCards[0].number.rawValue, card2Props: selectedCards[1].number.rawValue, card3Props: selectedCards[2].number.rawValue)
-        let checkShape = checkFeature(card1Prop: selectedCards[0].shape.rawValue, card2Props: selectedCards[1].shape.rawValue, card3Props: selectedCards[2].shape.rawValue)
-        let checkShading = checkFeature(card1Prop: selectedCards[0].shading.rawValue, card2Props: selectedCards[1].shading.rawValue, card3Props: selectedCards[2].shading.rawValue)
-        return checkColor && checkNumber && checkShape && checkShading
-
+//        let checkColor = checkFeature(card1Prop: cards[0].color.rawValue, card2Props: cards[1].color.rawValue, card3Props: cards[2].color.rawValue)
+//        let checkNumber = checkFeature(card1Prop: cards[0].number.rawValue, card2Props: cards[1].number.rawValue, card3Props: cards[2].number.rawValue)
+//        let checkShape = checkFeature(card1Prop: cards[0].shape.rawValue, card2Props: cards[1].shape.rawValue, card3Props: cards[2].shape.rawValue)
+//        let checkShading = checkFeature(card1Prop: cards[0].shading.rawValue, card2Props: cards[1].shading.rawValue, card3Props: cards[2].shading.rawValue)
+//        return checkColor && checkNumber && checkShape && checkShading
+        return true
+    }
+    
+    func SelectedSet() -> Bool {
+        return isSet(threeCards: selectedCards)
     }
     
     func isSelected(card: Card) -> Bool {
@@ -104,6 +114,38 @@ class SetGame{
     private func checkFeature (card1Prop prop1: String, card2Props prop2: String, card3Props prop3: String) -> Bool {
         return ((prop1, prop2) == (prop2, prop3) ||
                 ((prop1 != prop2) && (prop2 != prop3) && (prop3 != prop1)))
+    }
+    
+    func getHint() {
+        if possibleSet.count > 0 {
+            score -= 5
+            selectedCards.removeAll()
+            let cards = possibleSet[0]
+            for card in cards {
+                selectedCards.append(card)
+            }
+            possibleSet.remove(at: 0)
+        }
+    }
+    
+    
+    private func findPossibleSetsInGame() {
+        possibleSet.removeAll()
+        for index1 in 0..<cardsInGame.count {
+            for index2 in index1+1..<cardsInGame.count {
+                for index3 in index2..<cardsInGame.count {
+                    let cards = [cardsInGame[index1], cardsInGame[index2], cardsInGame[index3]]
+                    if isSet(threeCards: cards) {
+                        possibleSet.append(cards)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func clearSelected() {
+        selectedCards.removeAll()
     }
     
 }
