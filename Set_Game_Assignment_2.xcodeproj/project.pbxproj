@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CDA620A52681AC4800A69030 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA620A42681AC4800A69030 /* SetGame.swift */; };
+		CDA620A72681BDC200A69030 /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA620A62681BDC200A69030 /* ButtonHelper.swift */; };
 		CDD449382680C94000C150CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD449372680C94000C150CF /* AppDelegate.swift */; };
 		CDD4493A2680C94000C150CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD449392680C94000C150CF /* SceneDelegate.swift */; };
 		CDD4493C2680C94000C150CF /* SetGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD4493B2680C94000C150CF /* SetGameViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CDA620A42681AC4800A69030 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
+		CDA620A62681BDC200A69030 /* ButtonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
 		CDD449342680C94000C150CF /* Set_Game_Assignment_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set_Game_Assignment_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD449372680C94000C150CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD449392680C94000C150CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 			children = (
 				CDD449372680C94000C150CF /* AppDelegate.swift */,
 				CDD4494D2680D44F00C150CF /* Card.swift */,
+				CDA620A62681BDC200A69030 /* ButtonHelper.swift */,
+				CDA620A42681AC4800A69030 /* SetGame.swift */,
 				CDD449392680C94000C150CF /* SceneDelegate.swift */,
 				CDD4493B2680C94000C150CF /* SetGameViewController.swift */,
 				CDD4493D2680C94000C150CF /* Main.storyboard */,
@@ -142,8 +148,10 @@
 			files = (
 				CDD4493C2680C94000C150CF /* SetGameViewController.swift in Sources */,
 				CDD449382680C94000C150CF /* AppDelegate.swift in Sources */,
+				CDA620A52681AC4800A69030 /* SetGame.swift in Sources */,
 				CDD4493A2680C94000C150CF /* SceneDelegate.swift in Sources */,
 				CDD4494E2680D44F00C150CF /* Card.swift in Sources */,
+				CDA620A72681BDC200A69030 /* ButtonHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

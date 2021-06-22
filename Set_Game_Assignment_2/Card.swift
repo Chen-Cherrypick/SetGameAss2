@@ -22,15 +22,15 @@ struct Card: Equatable {
 }
 
 
-enum Color {
+enum Color: String {
     case pink
-    case peach
+    case purple
     case yellow
     
-    static let values = [pink, peach, yellow]
+    static let values = [pink, purple, yellow]
 }
 
-enum Shape {
+enum Shape: String {
     case square
     case circle
     case triangular
@@ -39,7 +39,7 @@ enum Shape {
 }
 
 
-enum Number {
+enum Number: String {
     case one
     case two
     case three
@@ -47,7 +47,7 @@ enum Number {
     static let values = [one, two, three]
 }
 
-enum Shading {
+enum Shading: String {
     case solid
     case stripped
     case open
