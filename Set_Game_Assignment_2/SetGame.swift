@@ -16,6 +16,11 @@ class SetGame{
     
     var possibleSet = [[Card]]()
     
+    var date = Date()
+    
+    var iphoneScore = 0
+    
+    var selectedIphone = false
     
     
     private func generateCardsCombination() {
@@ -32,14 +37,16 @@ class SetGame{
     }
     
     
-    func newGame() {
+    func newGame(date: Date) {
         score = 0
+        iphoneScore = 0
         cardsDeck.removeAll()
         cardsInGame.removeAll()
         selectedCards.removeAll()
         generateCardsCombination()
         addCards(numberOfCardsToAdd: 12)
         findPossibleSetsInGame()
+        self.date = date
         
     }
     
@@ -58,6 +65,17 @@ class SetGame{
         }
     }
     
+    private func checkTiming() {
+        let currentDate = Date()
+        let diffInSeconds = currentDate.timeIntervalSince(date)
+        if diffInSeconds > 60 {
+            score += 3
+        } else {
+            score += 7
+        }
+        date = currentDate
+    }
+    
     func selectCard(card: Card) {
         if selectedCards.count == 3 && SelectedSet() {
             for card in selectedCards {
@@ -72,7 +90,10 @@ class SetGame{
                 }
                 
             }
-            score += 5
+            if !selectedIphone{
+                checkTiming()
+            }
+            selectedIphone = false
             selectedCards.removeAll()
         } else if selectedCards.count == 3 && !SelectedSet() {
             score -= 5
@@ -94,12 +115,12 @@ class SetGame{
         if cards.count != 3 {
             return false
         }
-//        let checkColor = checkFeature(card1Prop: cards[0].color.rawValue, card2Props: cards[1].color.rawValue, card3Props: cards[2].color.rawValue)
-//        let checkNumber = checkFeature(card1Prop: cards[0].number.rawValue, card2Props: cards[1].number.rawValue, card3Props: cards[2].number.rawValue)
-//        let checkShape = checkFeature(card1Prop: cards[0].shape.rawValue, card2Props: cards[1].shape.rawValue, card3Props: cards[2].shape.rawValue)
-//        let checkShading = checkFeature(card1Prop: cards[0].shading.rawValue, card2Props: cards[1].shading.rawValue, card3Props: cards[2].shading.rawValue)
-//        return checkColor && checkNumber && checkShape && checkShading
-        return true
+        let checkColor = checkFeature(card1Prop: cards[0].color.rawValue, card2Props: cards[1].color.rawValue, card3Props: cards[2].color.rawValue)
+        let checkNumber = checkFeature(card1Prop: cards[0].number.rawValue, card2Props: cards[1].number.rawValue, card3Props: cards[2].number.rawValue)
+        let checkShape = checkFeature(card1Prop: cards[0].shape.rawValue, card2Props: cards[1].shape.rawValue, card3Props: cards[2].shape.rawValue)
+        let checkShading = checkFeature(card1Prop: cards[0].shading.rawValue, card2Props: cards[1].shading.rawValue, card3Props: cards[2].shading.rawValue)
+        return checkColor && checkNumber && checkShape && checkShading
+//        return true
     }
     
     func SelectedSet() -> Bool {
@@ -125,6 +146,19 @@ class SetGame{
                 selectedCards.append(card)
             }
             possibleSet.remove(at: 0)
+        }
+    }
+    
+    func iphoneTurn() {
+        if possibleSet.count > 0 {
+            iphoneScore += 5
+            selectedCards.removeAll()
+            let cards = possibleSet[0]
+            for card in cards {
+                selectedCards.append(card)
+            }
+            possibleSet.remove(at: 0)
+            selectedIphone = true
         }
     }
     

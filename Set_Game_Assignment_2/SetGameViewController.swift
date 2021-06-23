@@ -13,16 +13,43 @@ class SetGameViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var iphoneScoreLbl: UILabel!
+    var timerIphone : Timer?
+
     
     let game = SetGame()
+    var iphoneMode = true
     
     @IBOutlet var cardButtons: [UIButton]!
     
     @IBAction func newGameBtn(_ sender: UIButton) {
-        game.newGame()
+        let date = Date()
+        game.newGame(date: date)
         addCardsBtn.isEnabled = true
         updateViewFromModel()
+        startTimer()
+        
     }
+    
+    private func startTimer() {
+        let randomTime = Double.random(in: 10..<60)
+        timerIphone = Timer.scheduledTimer(timeInterval: randomTime, target: self, selector: #selector(iphoneTurn), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func iphoneTurn() {
+        self.game.iphoneTurn()
+        if game.iphoneScore > self.game.score {
+            iphoneScoreLbl.text = "😂"
+        } else {
+            iphoneScoreLbl.text = "😢"
+        }
+        updateViewFromModel()
+    }
+    
+    private func stopTimer() {
+        timerIphone?.invalidate()
+    }
+    
    
     @IBAction func add3Cards(_ sender: UIButton) {
         if (game.cardsInGame.count > 0){
@@ -42,6 +69,8 @@ class SetGameViewController: UIViewController {
                 game.selectCard(card: card)
             }
         }
+        stopTimer()
+        startTimer()
         updateViewFromModel()
     }
     

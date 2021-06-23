@@ -246,12 +246,20 @@
                                     <action selector="GetAHint:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yba-os-o7R"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="📱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlN-do-qad">
+                                <rect key="frame" x="186" y="506" width="54" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="0.80655557586718363" blue="0.79069607543186693" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <connections>
                         <outlet property="addCardsBtn" destination="FrW-FL-9jZ" id="bSp-BO-0nU"/>
+                        <outlet property="iphoneScoreLbl" destination="BlN-do-qad" id="FtH-cL-Wm5"/>
                         <outlet property="scoreLabel" destination="vOj-9k-GEa" id="dJ3-ty-4ip"/>
                         <outletCollection property="cardButtons" destination="RM2-rN-0y7" collectionClass="NSMutableArray" id="bpO-wk-iQa"/>
                         <outletCollection property="cardButtons" destination="ET9-bo-Rky" collectionClass="NSMutableArray" id="xaY-2B-ikY"/>
