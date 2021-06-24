@@ -82,13 +82,11 @@ extension UIButton {
     func select(color: UIColor = #colorLiteral(red: 1, green: 0.9767686725, blue: 0.836220324, alpha: 1) ) {
         self.layer.borderWidth = 5.0
         self.layer.borderColor = color.cgColor
-//        self.layer.backgroundColor = #colorLiteral(red: 1, green: 0.9767686725, blue: 0.836220324, alpha: 1)
     }
     
     func deselect(color: UIColor = #colorLiteral(red: 1, green: 0.7970929146, blue: 0.784461081, alpha: 1)) {
         self.layer.borderWidth = 2.0
         self.layer.borderColor = color.cgColor
-//        self.layer.backgroundColor = color.cgColor
     }
     
     func selected() -> Bool {

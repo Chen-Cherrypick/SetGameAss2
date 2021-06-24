@@ -13,6 +13,7 @@ class SetGame{
     var cardsDeck = [Card]()
     var cardsInGame = [Card]()
     var selectedCards = [Card]()
+    var notInUseCards = [Card]()
     
     var possibleSet = [[Card]]()
     
@@ -76,10 +77,14 @@ class SetGame{
         date = currentDate
     }
     
+    
+    
+    
     func selectCard(card: Card) {
         if selectedCards.count == 3 && SelectedSet() {
-            for card in selectedCards {
-                if let cardIndex = cardsInGame.firstIndex(of: card) {
+            for cardS in selectedCards {
+                if let cardIndex = cardsInGame.firstIndex(of: cardS) {
+                    notInUseCards.append(cardS)
                     cardsInGame.remove(at: cardIndex)
                     if cardsInGame.count < 12 && cardsDeck.count > 0 {
                         let randomIndex = cardsDeck.count.arc4random
@@ -98,10 +103,8 @@ class SetGame{
         } else if selectedCards.count == 3 && !SelectedSet() {
             score -= 5
             selectedCards.removeAll()
-        }
-        
-        if selectedCards.count != 3 {
-            if let selectedCard = selectedCards.firstIndex(of: card) {
+        } else if selectedCards.count != 3 {
+            if let selectedCard = selectedCards.firstIndex(of: card), let _ = notInUseCards.firstIndex(of: card){
                 selectedCards.remove(at: selectedCard)
             } else {
                 selectedCards.append(card)
@@ -120,7 +123,6 @@ class SetGame{
         let checkShape = checkFeature(card1Prop: cards[0].shape.rawValue, card2Props: cards[1].shape.rawValue, card3Props: cards[2].shape.rawValue)
         let checkShading = checkFeature(card1Prop: cards[0].shading.rawValue, card2Props: cards[1].shading.rawValue, card3Props: cards[2].shading.rawValue)
         return checkColor && checkNumber && checkShape && checkShading
-//        return true
     }
     
     func SelectedSet() -> Bool {
