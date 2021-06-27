@@ -13,8 +13,11 @@ class SetGameViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var hintBtn: UIButton!
+    
     @IBOutlet weak var iphoneScoreLbl: UILabel!
     var timerIphone : Timer?
+    
 
     
     let game = SetGame()
@@ -23,26 +26,34 @@ class SetGameViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     
     @IBAction func newGameBtn(_ sender: UIButton) {
+        stopTimer()
         let date = Date()
         game.newGame(date: date)
         addCardsBtn.isEnabled = true
+        hintBtn.isEnabled = true
         updateViewFromModel()
+        iphoneScoreLbl.text = "🤔"
         startTimer()
+        
         
     }
     
     private func startTimer() {
-        let randomTime = Double.random(in: 10..<60)
+        let randomTime = Double.random(in: 20..<40)
+        _ = Timer.scheduledTimer(timeInterval: randomTime-5, target: self, selector: #selector(changeEmoji), userInfo: nil, repeats: false)
         timerIphone = Timer.scheduledTimer(timeInterval: randomTime, target: self, selector: #selector(iphoneTurn), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func changeEmoji() {
+        iphoneScoreLbl.text = "😄"
+        updateViewFromModel()
     }
     
     @objc private func iphoneTurn() {
         self.game.iphoneTurn()
-        if game.iphoneScore > self.game.score {
-            iphoneScoreLbl.text = "😂"
-        } else {
-            iphoneScoreLbl.text = "😢"
-        }
+//        if game.iphoneScore > self.game.score {
+//            iphoneScoreLbl.text = "😄"
+//        }
         updateViewFromModel()
     }
     
@@ -50,14 +61,19 @@ class SetGameViewController: UIViewController {
         timerIphone?.invalidate()
     }
     
+    private func checkScores() {
+        if game.iphoneScore > self.game.score {
+            iphoneScoreLbl.text = "😂"
+        } else {
+            iphoneScoreLbl.text = "😢"
+        }
+    }
+    
    
     @IBAction func add3Cards(_ sender: UIButton) {
         if (game.cardsInGame.count > 0){
             game.addThreeCards()
             updateViewFromModel()
-            if game.cardsInGame.count > 23 {
-                addCardsBtn.isEnabled = false
-            }
         }
    
     }
@@ -69,15 +85,21 @@ class SetGameViewController: UIViewController {
                 game.selectCard(card: card)
             }
         }
-        stopTimer()
-        startTimer()
+        if game.selectedCards.count==3 && game.SelectedSet() && game.selectedIphone{
+            iphoneScoreLbl.text = "🤔"
+            stopTimer()
+            startTimer()
+        } else {
+            iphoneScoreLbl.text = "🤔"
+        }
         updateViewFromModel()
     }
     
     private func updateViewFromModel() {
         var indexOfCard = 0
         scoreLabel.text = "Score: \(game.score)"
-        if game.cardsInGame.count == 0 {
+        if game.cardsInGame.count == 0 && game.isStarted {
+            checkScores()
             let alert = UIAlertController(title: "Alert", message: "Congrats! You Won!", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -119,7 +141,7 @@ class SetGameViewController: UIViewController {
     @IBAction func GetAHint(_ sender: UIButton) {
         game.getHint()
         updateViewFromModel()
-        game.clearSelected()
+//        game.clearSelected()
     }
     
     

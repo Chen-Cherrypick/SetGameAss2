@@ -23,6 +23,8 @@ class SetGame{
     
     var selectedIphone = false
     
+    var isStarted = false
+    
     
     private func generateCardsCombination() {
         for color in Color.values {
@@ -48,7 +50,7 @@ class SetGame{
         addCards(numberOfCardsToAdd: 12)
         findPossibleSetsInGame()
         self.date = date
-        
+        isStarted = true
     }
     
     func addThreeCards() {
@@ -90,11 +92,12 @@ class SetGame{
                         let randomIndex = cardsDeck.count.arc4random
                         let randomCard = cardsDeck.remove(at: randomIndex)
                         cardsInGame.insert(randomCard, at: cardIndex)
-                        findPossibleSetsInGame()
+                        
                     }
                 }
                 
             }
+            findPossibleSetsInGame()
             if !selectedIphone{
                 checkTiming()
             }
@@ -160,6 +163,7 @@ class SetGame{
                 selectedCards.append(card)
             }
             possibleSet.remove(at: 0)
+            findPossibleSetsInGame()
             selectedIphone = true
         }
     }
