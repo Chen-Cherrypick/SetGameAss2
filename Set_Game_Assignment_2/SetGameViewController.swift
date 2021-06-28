@@ -78,8 +78,6 @@ class SetGameViewController: UIViewController {
             addCardsBtn.isEnabled = true
             game.addThreeCards()
             updateViewFromModel()
-        } else {
-            addCardsBtn.isEnabled = false
         }
    
     }
@@ -127,7 +125,7 @@ class SetGameViewController: UIViewController {
     }
     
     func changeButtonBorder(forButton button: UIButton, ofCard card: Card) {
-        if game.isSelected(card: card) {
+        if game.isCardSelected(card: card) {
             if game.selectedCards.count==3 && game.isSelectionASet() {
                 button.select(color: #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1))
             } else if game.selectedCards.count != 3{

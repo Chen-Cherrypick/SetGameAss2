@@ -68,10 +68,10 @@ class SetGame{
         }
     }
     
-    private func checkTiming() {
+    private func updateScoreAccordingToTime() {
         let currentDate = Date()
         let diffInSeconds = currentDate.timeIntervalSince(date)
-        if diffInSeconds > 60 {
+        if diffInSeconds > 40 {
             score += 3
         } else {
             score += 7
@@ -80,7 +80,7 @@ class SetGame{
     }
     
     private func isCardSelecedTwice(card: Card) -> Bool {
-        if let indexCard = selectedCards.firstIndex(of: card) , selectedCards.count < 3{
+        if let indexCard = selectedCards.firstIndex(of: card) , selectedCards.count < 3 {
             selectedCards.remove(at: indexCard)
             return true
         } else {
@@ -107,7 +107,7 @@ class SetGame{
                 }
                 findPossibleSetsInGame()
                 if !isIphoneTurn{
-                    checkTiming()
+                    updateScoreAccordingToTime()
                 }
                 isIphoneTurn = false
                 selectedCards.removeAll()
@@ -115,15 +115,9 @@ class SetGame{
                 score -= 5
                 selectedCards.removeAll()
             } else if selectedCards.count != 3 {
-                if let selectedCard = selectedCards.firstIndex(of: card), let _ = notInUseCards.firstIndex(of: card){
-                    selectedCards.remove(at: selectedCard)
-                } else {
-                    selectedCards.append(card)
-                }
+                selectedCards.append(card)
             }
         }
-        
-        
     }
     
     
@@ -142,7 +136,7 @@ class SetGame{
         return isSet(threeCards: selectedCards)
     }
     
-    func isSelected(card: Card) -> Bool {
+    func isCardSelected(card: Card) -> Bool {
         return selectedCards.firstIndex(of: card) != nil
     }
     
@@ -192,7 +186,6 @@ class SetGame{
                 }
             }
         }
-
     }
     
     
