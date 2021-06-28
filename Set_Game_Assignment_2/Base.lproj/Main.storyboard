@@ -243,7 +243,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                 <state key="normal" title="Get A Hint"/>
                                 <connections>
-                                    <action selector="GetAHint:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yba-os-o7R"/>
+                                    <action selector="getAHint:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yba-os-o7R"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="📱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlN-do-qad">

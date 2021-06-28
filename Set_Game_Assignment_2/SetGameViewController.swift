@@ -18,6 +18,8 @@ class SetGameViewController: UIViewController {
     @IBOutlet weak var iphoneScoreLbl: UILabel!
     var timerIphone : Timer?
     
+    var tempTimer : Timer?
+    
 
     
     let game = SetGame()
@@ -32,32 +34,32 @@ class SetGameViewController: UIViewController {
         addCardsBtn.isEnabled = true
         hintBtn.isEnabled = true
         updateViewFromModel()
-        iphoneScoreLbl.text = "🤔"
         startTimer()
         
         
     }
     
     private func startTimer() {
+        iphoneScoreLbl.text = "🤔"
         let randomTime = Double.random(in: 20..<40)
-        _ = Timer.scheduledTimer(timeInterval: randomTime-5, target: self, selector: #selector(changeEmoji), userInfo: nil, repeats: false)
-        timerIphone = Timer.scheduledTimer(timeInterval: randomTime, target: self, selector: #selector(iphoneTurn), userInfo: nil, repeats: true)
+        tempTimer = Timer.scheduledTimer(timeInterval: randomTime-5, target: self, selector: #selector(changeEmojiBeforeIphoneTurn), userInfo: nil, repeats: false)
+        timerIphone = Timer.scheduledTimer(timeInterval: randomTime, target: self, selector: #selector(iphoneTurn), userInfo: nil, repeats: false)
     }
     
-    @objc private func changeEmoji() {
+    @objc private func changeEmojiBeforeIphoneTurn() {
         iphoneScoreLbl.text = "😄"
         updateViewFromModel()
     }
     
     @objc private func iphoneTurn() {
         self.game.iphoneTurn()
-//        if game.iphoneScore > self.game.score {
-//            iphoneScoreLbl.text = "😄"
-//        }
+        iphoneScoreLbl.text = "😶"
         updateViewFromModel()
     }
     
     private func stopTimer() {
+        iphoneScoreLbl.text = "😶"
+        tempTimer?.invalidate()
         timerIphone?.invalidate()
     }
     
@@ -71,26 +73,27 @@ class SetGameViewController: UIViewController {
     
    
     @IBAction func add3Cards(_ sender: UIButton) {
-        if (game.cardsInGame.count > 0){
+        game.clearSelected()
+        if (game.cardsInGame.count > 0 && game.cardsInGame.count <= 21){
+            addCardsBtn.isEnabled = true
             game.addThreeCards()
             updateViewFromModel()
+        } else {
+            addCardsBtn.isEnabled = false
         }
    
     }
     
     @IBAction func selectCard(_ sender: UIButton) {
+        if game.selectedCards.count==3 && game.isSelectionASet() {
+            stopTimer()
+            startTimer()
+        }
         if let cardIndex = cardButtons.firstIndex(of: sender) {
             if cardIndex < game.cardsInGame.count {
                 let card = game.cardsInGame[cardIndex]
                 game.selectCard(card: card)
             }
-        }
-        if game.selectedCards.count==3 && game.SelectedSet() && game.selectedIphone{
-            iphoneScoreLbl.text = "🤔"
-            stopTimer()
-            startTimer()
-        } else {
-            iphoneScoreLbl.text = "🤔"
         }
         updateViewFromModel()
     }
@@ -125,11 +128,11 @@ class SetGameViewController: UIViewController {
     
     func changeButtonBorder(forButton button: UIButton, ofCard card: Card) {
         if game.isSelected(card: card) {
-            if game.selectedCards.count==3 && game.SelectedSet() {
+            if game.selectedCards.count==3 && game.isSelectionASet() {
                 button.select(color: #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1))
             } else if game.selectedCards.count != 3{
                 button.select()
-            } else if game.selectedCards.count==3 && !game.SelectedSet() {
+            } else if game.selectedCards.count==3 && !game.isSelectionASet() {
                 button.select(color: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
             }
         } else {
@@ -138,10 +141,16 @@ class SetGameViewController: UIViewController {
         
     }
     
-    @IBAction func GetAHint(_ sender: UIButton) {
-        game.getHint()
+    @IBAction func getAHint(_ sender: UIButton) {
+        if game.isSelectionASet() {
+            game.clearSelected()
+            startTimer()
+        } else if game.possibleSet.count > 0 {
+            game.getHint()
+            stopTimer()
+        }
         updateViewFromModel()
-//        game.clearSelected()
+
     }
     
     

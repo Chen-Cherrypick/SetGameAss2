@@ -21,7 +21,7 @@ class SetGame{
     
     var iphoneScore = 0
     
-    var selectedIphone = false
+    var isIphoneTurn = false
     
     var isStarted = false
     
@@ -79,40 +79,50 @@ class SetGame{
         date = currentDate
     }
     
-    
+    private func isCardSelecedTwice(card: Card) -> Bool {
+        if let indexCard = selectedCards.firstIndex(of: card) , selectedCards.count < 3{
+            selectedCards.remove(at: indexCard)
+            return true
+        } else {
+            return false
+        }
+    }
     
     
     func selectCard(card: Card) {
-        if selectedCards.count == 3 && SelectedSet() {
-            for cardS in selectedCards {
-                if let cardIndex = cardsInGame.firstIndex(of: cardS) {
-                    notInUseCards.append(cardS)
-                    cardsInGame.remove(at: cardIndex)
-                    if cardsInGame.count < 12 && cardsDeck.count > 0 {
-                        let randomIndex = cardsDeck.count.arc4random
-                        let randomCard = cardsDeck.remove(at: randomIndex)
-                        cardsInGame.insert(randomCard, at: cardIndex)
-                        
+        if !isCardSelecedTwice(card: card) {
+            if selectedCards.count == 3 && isSelectionASet() {
+                for cardS in selectedCards {
+                    if let cardIndex = cardsInGame.firstIndex(of: cardS) {
+                        notInUseCards.append(cardS)
+                        cardsInGame.remove(at: cardIndex)
+                        if cardsInGame.count < 12 && cardsDeck.count > 0 {
+                            let randomIndex = cardsDeck.count.arc4random
+                            let randomCard = cardsDeck.remove(at: randomIndex)
+                            cardsInGame.insert(randomCard, at: cardIndex)
+                            
+                        }
                     }
+                    
                 }
-                
-            }
-            findPossibleSetsInGame()
-            if !selectedIphone{
-                checkTiming()
-            }
-            selectedIphone = false
-            selectedCards.removeAll()
-        } else if selectedCards.count == 3 && !SelectedSet() {
-            score -= 5
-            selectedCards.removeAll()
-        } else if selectedCards.count != 3 {
-            if let selectedCard = selectedCards.firstIndex(of: card), let _ = notInUseCards.firstIndex(of: card){
-                selectedCards.remove(at: selectedCard)
-            } else {
-                selectedCards.append(card)
+                findPossibleSetsInGame()
+                if !isIphoneTurn{
+                    checkTiming()
+                }
+                isIphoneTurn = false
+                selectedCards.removeAll()
+            } else if selectedCards.count == 3 && !isSelectionASet() {
+                score -= 5
+                selectedCards.removeAll()
+            } else if selectedCards.count != 3 {
+                if let selectedCard = selectedCards.firstIndex(of: card), let _ = notInUseCards.firstIndex(of: card){
+                    selectedCards.remove(at: selectedCard)
+                } else {
+                    selectedCards.append(card)
+                }
             }
         }
+        
         
     }
     
@@ -128,7 +138,7 @@ class SetGame{
         return checkColor && checkNumber && checkShape && checkShading
     }
     
-    func SelectedSet() -> Bool {
+    func isSelectionASet() -> Bool {
         return isSet(threeCards: selectedCards)
     }
     
@@ -144,7 +154,7 @@ class SetGame{
     
     func getHint() {
         if possibleSet.count > 0 {
-            score -= 5
+            score += 3
             selectedCards.removeAll()
             let cards = possibleSet[0]
             for card in cards {
@@ -152,6 +162,7 @@ class SetGame{
             }
             possibleSet.remove(at: 0)
         }
+
     }
     
     func iphoneTurn() {
@@ -164,7 +175,7 @@ class SetGame{
             }
             possibleSet.remove(at: 0)
             findPossibleSetsInGame()
-            selectedIphone = true
+            isIphoneTurn = true
         }
     }
     
@@ -181,10 +192,26 @@ class SetGame{
                 }
             }
         }
+
     }
     
     
     func clearSelected() {
+        for cardS in selectedCards {
+            if let cardIndex = cardsInGame.firstIndex(of: cardS) {
+                notInUseCards.append(cardS)
+                cardsInGame.remove(at: cardIndex)
+                if cardsInGame.count < 12 && cardsDeck.count > 0 {
+                    let randomIndex = cardsDeck.count.arc4random
+                    let randomCard = cardsDeck.remove(at: randomIndex)
+                    cardsInGame.insert(randomCard, at: cardIndex)
+                    
+                }
+            }
+            
+        }
+        findPossibleSetsInGame()
+        isIphoneTurn = false
         selectedCards.removeAll()
     }
     
