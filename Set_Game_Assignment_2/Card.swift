@@ -25,9 +25,9 @@ struct Card: Equatable {
 enum Color: String {
     case pink
     case purple
-    case yellow
+    case grey
     
-    static let values = [pink, purple, yellow]
+    static let values = [pink, purple, grey]
 }
 
 enum Shape: String {

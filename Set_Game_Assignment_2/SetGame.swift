@@ -13,13 +13,9 @@ class SetGame {
     private var cardsDeck = [Card]()
     private var cardsInGame = [Card]()
     private var selectedCards = [Card]()
-
+    
     
     private var lastSavedDate = Date()
-    
-    private var iphoneScore = 0
-    
-    private var isSelectedSetFoundByIphone = false
     
     private var isGameStarted = false
     
@@ -40,7 +36,6 @@ class SetGame {
     
     func newGame(date: Date) {
         score = 0
-        iphoneScore = 0
         cardsDeck.removeAll()
         cardsInGame.removeAll()
         selectedCards.removeAll()
@@ -105,11 +100,8 @@ class SetGame {
         if !isCardSelecedTwice(card: card) {
             if selectedCards.count == 3 {
                 if isSelectionASet() {
-                  replaceCards()
-                    if !isSelectedSetFoundByIphone{
-                        updateScoreAccordingToTime()
-                    }
-                    isSelectedSetFoundByIphone = false
+                    replaceCards()
+                    updateScoreAccordingToTime()
                     selectedCards.removeAll()
                 } else {
                     score -= ScoreAdditions.wrongSet
@@ -142,6 +134,8 @@ class SetGame {
         return selectedCards.firstIndex(of: card) != nil
     }
     
+
+    
     
     private func checkFeature (card1Prop prop1: String, card2Props prop2: String, card3Props prop3: String) -> Bool {
         return ((prop1, prop2) == (prop2, prop3) ||
@@ -150,20 +144,19 @@ class SetGame {
     
 
     
-    func getAPossibleSet(iphoneTurn isiPhone: Bool) {
+    func getAHint() {
         let possibleSet = findPossibleSetsInGame()
         if possibleSet.count > 0 {
-            if isiPhone {
-                iphoneScore += ScoreAdditions.iphonePoint
-                isSelectedSetFoundByIphone = true
-            } else {
-                score += ScoreAdditions.setAfterStoper
-            }
+            score -= ScoreAdditions.setAfterStoper
             selectedCards.removeAll()
             for card in possibleSet {
                 selectedCards.append(card)
             }
         }
+    }
+    
+    func shuffleCardsOnBoard() {
+        cardsInGame.shuffle()
     }
     
 
@@ -187,7 +180,6 @@ class SetGame {
     
     func clearSelected() {
         replaceCards()
-        isSelectedSetFoundByIphone = false
         selectedCards.removeAll()
     }
     
@@ -196,9 +188,6 @@ class SetGame {
         return score
     }
 
-    func getIphoneScore() -> Int {
-        return iphoneScore
-    }
 
     func getIsStarted() -> Bool {
         return isGameStarted
@@ -212,7 +201,10 @@ class SetGame {
         return selectedCards
     }
     
-    
+    func isCardInGame(card: Card) -> Bool {
+        return (cardsInGame.firstIndex(of: card) != nil)
+    }
+
     
     struct ScoreAdditions {
         static let stoper = 40.0
