@@ -11,16 +11,54 @@ class SetGameViewController: UIViewController {
     
     @IBOutlet weak var addThreeMoreCardsBtn: UIButton!
     
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBOutlet weak var scoreLabelPlayer1: UILabel!
+    
+    @IBOutlet weak var whosTurnLabel: UILabel!
+    
+    @IBOutlet weak var scoreLabelPlayer2: UILabel!
     
     @IBOutlet weak var hintBtn: UIButton!
     
-
+    @IBOutlet weak var player2Btn: UIButton!
+    
+    @IBOutlet weak var player1Btn: UIButton!
+    
+    private let timeForFirstTry = 10
+    
+    private let timeForSecondTry = 15
+    
     private let game = SetGame()
+    
+    static var playerTurn = Int()
+    
+    private var timer : Timer?
+    
+    private var firstTurn = true
+    
+    private var cardsAvailables = false
+    
+    private var wrongSet = false
+    
+    private  var timeForTurn = 10 {
+        didSet {
+            if SetGameViewController.playerTurn != 0 {
+                timerLabel.text = String(timeForTurn)
+            } else {
+                timerLabel.text = "0"
+            }
+            
+        }
+    }
+    
+    
+    
     
     
     @IBOutlet weak var cardsGrid: BoardView! {
         didSet {
+            
             let swipe = UISwipeGestureRecognizer(target: self, action: #selector(add3Cards))
             swipe.direction = [.up]
             cardsGrid.addGestureRecognizer(swipe)
@@ -32,17 +70,87 @@ class SetGameViewController: UIViewController {
         
     }
     
-
+    
+    
+    private func startTimer(with time: Int) {
+        cardsAvailables = true
+        if time == timeForFirstTry {
+            timeForTurn = timeForFirstTry
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(switchPlayerTurn), userInfo: nil, repeats: true)
+        } else {
+            if !wrongSet {
+                game.changeScoreForPlayerDidntPlayInHisTurn(player: SetGameViewController.playerTurn)
+            }
+//            game.changeScoreForPlayerDidntPlayInHisTurn(player: SetGameViewController.playerTurn)
+            changePlayerNumber()
+            timeForTurn = time
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(noOnesTurn), userInfo: nil, repeats: true)
+            updateViewFromModel()
+            
+            
+        }
+        
+    }
+    
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timeForTurn = 0
+        addThreeMoreCardsBtn.isEnabled = false
+        hintBtn.isEnabled = false
+        
+    }
+    
+    
+    @objc private func switchPlayerTurn() {
+        if timeForTurn > 0 {
+            timeForTurn -= 1
+        } else if timeForTurn == 0 {
+            game.clearSelectedWrongSet()
+            firstTurn = false
+            timer?.invalidate()
+            startTimer(with: 15)
+            addThreeMoreCardsBtn.isEnabled = false
+            
+        }
+        
+    }
+    
+    @objc private func noOnesTurn() {
+        if timeForTurn > 0 {
+            timeForTurn -= 1
+        } else if timeForTurn == 0 {
+            let alert = UIAlertController(title: "Alert", message: "You both suck", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: clearSelected))
+            self.present(alert, animated: true, completion: nil)
+            timer?.invalidate()
+            SetGameViewController.playerTurn = 0
+            timeForTurn = 0
+            addThreeMoreCardsBtn.isEnabled = false
+            hintBtn.isEnabled = false
+            player2Btn.isEnabled = true
+            player1Btn.isEnabled = true
+            cardsAvailables = false
+            
+        }
+    }
+    
+    private func clearSelected(alert: UIAlertAction) {
+        game.clearSelectedWrongSet()
+        wrongSet = false
+        updateViewFromModel()
+    }
     
     @IBAction func newGameBtn(_ sender: UIButton) {
+        SetGameViewController.playerTurn = 0
         let date = Date()
         game.newGame(date: date)
-        addThreeMoreCardsBtn.isEnabled = true
-        hintBtn.isEnabled = true
+        hintBtn.isEnabled = false
+        addThreeMoreCardsBtn.isEnabled = false
+        player2Btn.isEnabled = true
+        player1Btn.isEnabled = true
         cardsGrid.cardViews.removeAll()
         updateViewFromModel()
-        
-        
     }
     
     @objc func shuffleCards() {
@@ -50,36 +158,58 @@ class SetGameViewController: UIViewController {
         updateViewFromModel()
     }
     
-
-
     
-//    private func checkFinalScores() {
-//        if game.getIphoneScore() > self.game.getPlayerScore() {
-//            iphoneScoreLbl.text = Emoji.winningMode
-//        } else {
-//            iphoneScoreLbl.text = Emoji.losingMode
-//        }
-//    }
+    private func checkFinalScores() -> Int{
+        if game.getPlayer2Score() > self.game.getPlayer1Score() {
+            return 2
+        } else {
+            return 1
+        }
+    }
     
+    private func changePlayerNumber() {
+        if SetGameViewController.playerTurn == 1 {
+            SetGameViewController.playerTurn = 2
+        } else {
+            SetGameViewController.playerTurn = 1
+        }
+    }
     
     @IBAction func add3Cards(_ sender: UIButton?) {
-        game.clearSelected()
-        if (game.getCardsInGame().count < 81){
-            addThreeMoreCardsBtn.isEnabled = true
-            game.addThreeCards()
+        if SetGameViewController.playerTurn != 0 {
+            if game.isSelectionASet() {
+                game.clearSelected()
+            } else {
+                game.clearSelectedWrongSet()
+            }
+            if (game.getCardsInGame().count < 79){
+                addThreeMoreCardsBtn.isEnabled = true
+                hintBtn.isEnabled = true
+                game.addThreeCards(by: SetGameViewController.playerTurn)
+                updateViewFromModel()
+            }
             updateViewFromModel()
         }
-        
     }
     
     
-    
+    private func updateTurnLabel() {
+        if SetGameViewController.playerTurn == 1 {
+            whosTurnLabel.text = "⬅️"
+        } else if SetGameViewController.playerTurn == 2 {
+            whosTurnLabel.text = "➡️"
+        } else {
+            whosTurnLabel.text = "❓"
+        }
+    }
     
     private func updateViewFromModel() {
-//        var indexOfCard = 0
-        scoreLabel.text = "Score: \(game.getPlayerScore())"
+        scoreLabelPlayer1.text = "Score Player 1: \(game.getPlayer1Score())"
+        scoreLabelPlayer2.text = "Score Player 2: \(game.getPlayer2Score())"
+        updateTurnLabel()
         if game.getCardsInGame().count == 0 && game.getIsStarted() {
-            let alert = UIAlertController(title: "Alert", message: "Congrats! You Won!", preferredStyle: UIAlertController.Style.alert)
+            let winner = checkFinalScores()
+            let alert = UIAlertController(title: "Alert", message: "Congrats! Player \(winner) is the winner!", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
@@ -89,12 +219,13 @@ class SetGameViewController: UIViewController {
     }
     
     
+    
+    
     private func updateCardsViewsFromModel() {
         if cardsGrid.cardViews.count - game.getCardsInGame().count > 0 {
             let cardsView = cardsGrid.cardViews[..<game.getCardsInGame().count]
             cardsGrid.cardViews = Array(cardsView)
         }
-        
         let numberOfCardsView = cardsGrid.cardViews.count
         for index in game.getCardsInGame().indices {
             let card = game.getCardsInGame()[index]
@@ -107,8 +238,27 @@ class SetGameViewController: UIViewController {
                 let cardView = cardsGrid.cardViews[index]
                 updateCardView(forCardView: cardView, forCard: card)
             }
-            
-            
+        }
+    }
+    
+    private func updateTurns() {
+        if game.getSelectedCards().count == 3 {
+            stopTimer()
+            if !game.isSelectionASet(){
+                if firstTurn {
+                    firstTurn = false
+                    wrongSet = true
+                    startTimer(with: timeForSecondTry)
+                } else {
+                    wrongSet = true
+                    noOnesTurn()
+                }
+            } else {
+                cardsAvailables = false
+                SetGameViewController.playerTurn = 0
+                player2Btn.isEnabled = true
+                player1Btn.isEnabled = true
+            }
         }
     }
     
@@ -120,16 +270,46 @@ class SetGameViewController: UIViewController {
     }
     
     @objc private func tapCard(by recognizer: UITapGestureRecognizer) {
-        switch recognizer.state {
-        case .ended:
-            if let cardView = recognizer.view! as? CardView {
-                let index = cardsGrid.cardViews.firstIndex(of: cardView) ?? 0
-                let card = game.getCardsInGame()[index]
-                game.selectCard(card: card)
+        if cardsAvailables {
+            let oldPlayer = SetGameViewController.playerTurn
+            let oldFirstTurn = firstTurn
+            updateTurns()
+            switch recognizer.state {
+            case .ended:
+                if let cardView = recognizer.view! as? CardView {
+                    let index = cardsGrid.cardViews.firstIndex(of: cardView) ?? 0
+                    let card = game.getCardsInGame()[index]
+                    game.selectCard(card: card, by: oldPlayer,for: oldFirstTurn)
+                }
+            default:
+                break
             }
-        default:
-            break
+            updateViewFromModel()
+        } else if game.getSelectedCards().count > 0 {
+            game.clearSelectedWrongSet()
         }
+    }
+    
+    private func playerStarted() {
+        startTimer(with: timeForFirstTry)
+        addThreeMoreCardsBtn.isEnabled = true
+        hintBtn.isEnabled = true
+        player1Btn.isEnabled = false
+        player2Btn.isEnabled = false
+    }
+    
+    @IBAction func player1Turn(_ sender: UIButton) {
+        firstTurn = true
+        SetGameViewController.playerTurn = 1
+        playerStarted()
+        updateViewFromModel()
+        
+    }
+    
+    @IBAction func player2Turn(_ sender: UIButton) {
+        firstTurn = true
+        SetGameViewController.playerTurn = 2
+        playerStarted()
         updateViewFromModel()
     }
     
@@ -152,7 +332,7 @@ class SetGameViewController: UIViewController {
         } else {
             cardView.isMatched = nil
         }
-
+        
     }
     
     
@@ -161,10 +341,10 @@ class SetGameViewController: UIViewController {
         if game.isSelectionASet() {
             game.clearSelected()
         } else if game.findPossibleSetsInGame().count > 0 {
-            game.getAHint()
+            game.getAHint(forPlayer: SetGameViewController.playerTurn)
         }
+        stopTimer()
         updateViewFromModel()
-        
     }
     
     
