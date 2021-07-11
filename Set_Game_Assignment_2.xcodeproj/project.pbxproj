@@ -11,6 +11,10 @@
 		CD6A5BAA268C8579002681F0 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A5BA9268C8579002681F0 /* Grid.swift */; };
 		CD6A5BAC268C8A1D002681F0 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A5BAB268C8A1D002681F0 /* BoardView.swift */; };
 		CD6A5BAE268C8A7F002681F0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A5BAD268C8A7F002681F0 /* CardView.swift */; };
+		CD7D2EC3269B062600BF8C48 /* ConcentrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D2EC0269B062600BF8C48 /* ConcentrationViewController.swift */; };
+		CD7D2EC4269B062600BF8C48 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D2EC1269B062600BF8C48 /* Concentration.swift */; };
+		CD7D2EC5269B062600BF8C48 /* CardConcentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D2EC2269B062600BF8C48 /* CardConcentration.swift */; };
+		CD7D2EC7269B0F8C00BF8C48 /* ConcentrationThemeChooseControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7D2EC6269B0F8C00BF8C48 /* ConcentrationThemeChooseControllerViewController.swift */; };
 		CDA620A52681AC4800A69030 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA620A42681AC4800A69030 /* SetGame.swift */; };
 		CDA620A72681BDC200A69030 /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA620A62681BDC200A69030 /* ButtonHelper.swift */; };
 		CDD449382680C94000C150CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD449372680C94000C150CF /* AppDelegate.swift */; };
@@ -27,6 +31,10 @@
 		CD6A5BA9268C8579002681F0 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = ../../../../../../Downloads/Grid.swift; sourceTree = "<group>"; };
 		CD6A5BAB268C8A1D002681F0 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		CD6A5BAD268C8A7F002681F0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		CD7D2EC0269B062600BF8C48 /* ConcentrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationViewController.swift; sourceTree = "<group>"; };
+		CD7D2EC1269B062600BF8C48 /* Concentration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		CD7D2EC2269B062600BF8C48 /* CardConcentration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardConcentration.swift; sourceTree = "<group>"; };
+		CD7D2EC6269B0F8C00BF8C48 /* ConcentrationThemeChooseControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationThemeChooseControllerViewController.swift; sourceTree = "<group>"; };
 		CDA620A42681AC4800A69030 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		CDA620A62681BDC200A69030 /* ButtonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
 		CDD449342680C94000C150CF /* Set_Game_Assignment_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set_Game_Assignment_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,9 +59,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD7D2EBF269B061700BF8C48 /* Concentration */ = {
+			isa = PBXGroup;
+			children = (
+				CD7D2EC6269B0F8C00BF8C48 /* ConcentrationThemeChooseControllerViewController.swift */,
+				CD7D2EC2269B062600BF8C48 /* CardConcentration.swift */,
+				CD7D2EC1269B062600BF8C48 /* Concentration.swift */,
+				CD7D2EC0269B062600BF8C48 /* ConcentrationViewController.swift */,
+			);
+			path = Concentration;
+			sourceTree = "<group>";
+		};
 		CDD4492B2680C94000C150CF = {
 			isa = PBXGroup;
 			children = (
+				CD7D2EBF269B061700BF8C48 /* Concentration */,
 				CDD449362680C94000C150CF /* Set_Game_Assignment_2 */,
 				CDD449352680C94000C150CF /* Products */,
 			);
@@ -163,8 +183,12 @@
 				CDD449382680C94000C150CF /* AppDelegate.swift in Sources */,
 				CD6A5BAA268C8579002681F0 /* Grid.swift in Sources */,
 				CD6A5BAE268C8A7F002681F0 /* CardView.swift in Sources */,
+				CD7D2EC4269B062600BF8C48 /* Concentration.swift in Sources */,
 				CDA620A52681AC4800A69030 /* SetGame.swift in Sources */,
+				CD7D2EC5269B062600BF8C48 /* CardConcentration.swift in Sources */,
 				CDD4493A2680C94000C150CF /* SceneDelegate.swift in Sources */,
+				CD7D2EC7269B0F8C00BF8C48 /* ConcentrationThemeChooseControllerViewController.swift in Sources */,
+				CD7D2EC3269B062600BF8C48 /* ConcentrationViewController.swift in Sources */,
 				CD6A5BAC268C8A1D002681F0 /* BoardView.swift in Sources */,
 				CDD4494E2680D44F00C150CF /* Card.swift in Sources */,
 				CDA620A72681BDC200A69030 /* ButtonHelper.swift in Sources */,
