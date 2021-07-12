@@ -17,12 +17,12 @@ class ButtonHelper {
             return UIColor.systemPink
         case .purple:
             return UIColor.purple
-        case .yellow:
+        case .grey:
             return UIColor.darkGray
         }
     }
     
-    private static func getShape(ofCard card: Card) -> String{
+    static func getShape(ofCard card: Card) -> String{
         switch card.shape {
         case .square:
             return "◼︎"
@@ -38,9 +38,9 @@ class ButtonHelper {
         case .one:
             return "\(shape)"
         case .two:
-            return "\(shape) \(shape)"
+            return "\(shape)   \(shape)"
         case .three:
-            return "\(shape) \(shape) \(shape)"
+            return "\(shape)   \(shape)   \(shape)"
         }
     }
     

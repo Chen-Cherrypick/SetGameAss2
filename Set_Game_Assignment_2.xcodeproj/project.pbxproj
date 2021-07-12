@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CD305AE12689FA3A001AEB97 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD305AE02689FA3A001AEB97 /* ButtonExtension.swift */; };
+		CD6A5BAA268C8579002681F0 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A5BA9268C8579002681F0 /* Grid.swift */; };
+		CD6A5BAC268C8A1D002681F0 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A5BAB268C8A1D002681F0 /* BoardView.swift */; };
+		CD6A5BAE268C8A7F002681F0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6A5BAD268C8A7F002681F0 /* CardView.swift */; };
 		CDA620A52681AC4800A69030 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA620A42681AC4800A69030 /* SetGame.swift */; };
 		CDA620A72681BDC200A69030 /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA620A62681BDC200A69030 /* ButtonHelper.swift */; };
 		CDD449382680C94000C150CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD449372680C94000C150CF /* AppDelegate.swift */; };
@@ -21,6 +24,9 @@
 
 /* Begin PBXFileReference section */
 		CD305AE02689FA3A001AEB97 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		CD6A5BA9268C8579002681F0 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = ../../../../../../Downloads/Grid.swift; sourceTree = "<group>"; };
+		CD6A5BAB268C8A1D002681F0 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		CD6A5BAD268C8A7F002681F0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CDA620A42681AC4800A69030 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		CDA620A62681BDC200A69030 /* ButtonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
 		CDD449342680C94000C150CF /* Set_Game_Assignment_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set_Game_Assignment_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +70,9 @@
 		CDD449362680C94000C150CF /* Set_Game_Assignment_2 */ = {
 			isa = PBXGroup;
 			children = (
+				CD6A5BA9268C8579002681F0 /* Grid.swift */,
+				CD6A5BAB268C8A1D002681F0 /* BoardView.swift */,
+				CD6A5BAD268C8A7F002681F0 /* CardView.swift */,
 				CDD449372680C94000C150CF /* AppDelegate.swift */,
 				CDD4494D2680D44F00C150CF /* Card.swift */,
 				CDA620A62681BDC200A69030 /* ButtonHelper.swift */,
@@ -152,8 +161,11 @@
 				CD305AE12689FA3A001AEB97 /* ButtonExtension.swift in Sources */,
 				CDD4493C2680C94000C150CF /* SetGameViewController.swift in Sources */,
 				CDD449382680C94000C150CF /* AppDelegate.swift in Sources */,
+				CD6A5BAA268C8579002681F0 /* Grid.swift in Sources */,
+				CD6A5BAE268C8A7F002681F0 /* CardView.swift in Sources */,
 				CDA620A52681AC4800A69030 /* SetGame.swift in Sources */,
 				CDD4493A2680C94000C150CF /* SceneDelegate.swift in Sources */,
+				CD6A5BAC268C8A1D002681F0 /* BoardView.swift in Sources */,
 				CDD4494E2680D44F00C150CF /* Card.swift in Sources */,
 				CDA620A72681BDC200A69030 /* ButtonHelper.swift in Sources */,
 			);
