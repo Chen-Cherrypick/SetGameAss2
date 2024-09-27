@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD305AE12689FA3A001AEB97 /* ButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD305AE02689FA3A001AEB97 /* ButtonExtension.swift */; };
+		CDA620A52681AC4800A69030 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA620A42681AC4800A69030 /* SetGame.swift */; };
+		CDA620A72681BDC200A69030 /* ButtonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA620A62681BDC200A69030 /* ButtonHelper.swift */; };
 		CDD449382680C94000C150CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD449372680C94000C150CF /* AppDelegate.swift */; };
 		CDD4493A2680C94000C150CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD449392680C94000C150CF /* SceneDelegate.swift */; };
 		CDD4493C2680C94000C150CF /* SetGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD4493B2680C94000C150CF /* SetGameViewController.swift */; };
 		CDD4493F2680C94000C150CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD4493D2680C94000C150CF /* Main.storyboard */; };
 		CDD449412680C94100C150CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD449402680C94100C150CF /* Assets.xcassets */; };
 		CDD449442680C94100C150CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD449422680C94100C150CF /* LaunchScreen.storyboard */; };
+		CDD4494E2680D44F00C150CF /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD4494D2680D44F00C150CF /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD305AE02689FA3A001AEB97 /* ButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtension.swift; sourceTree = "<group>"; };
+		CDA620A42681AC4800A69030 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
+		CDA620A62681BDC200A69030 /* ButtonHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHelper.swift; sourceTree = "<group>"; };
 		CDD449342680C94000C150CF /* Set_Game_Assignment_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set_Game_Assignment_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD449372680C94000C150CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD449392680C94000C150CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +31,7 @@
 		CDD449402680C94100C150CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD449432680C94100C150CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD449452680C94100C150CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDD4494D2680D44F00C150CF /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +65,10 @@
 			isa = PBXGroup;
 			children = (
 				CDD449372680C94000C150CF /* AppDelegate.swift */,
+				CDD4494D2680D44F00C150CF /* Card.swift */,
+				CDA620A62681BDC200A69030 /* ButtonHelper.swift */,
+				CD305AE02689FA3A001AEB97 /* ButtonExtension.swift */,
+				CDA620A42681AC4800A69030 /* SetGame.swift */,
 				CDD449392680C94000C150CF /* SceneDelegate.swift */,
 				CDD4493B2680C94000C150CF /* SetGameViewController.swift */,
 				CDD4493D2680C94000C150CF /* Main.storyboard */,
@@ -137,9 +149,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD305AE12689FA3A001AEB97 /* ButtonExtension.swift in Sources */,
 				CDD4493C2680C94000C150CF /* SetGameViewController.swift in Sources */,
 				CDD449382680C94000C150CF /* AppDelegate.swift in Sources */,
+				CDA620A52681AC4800A69030 /* SetGame.swift in Sources */,
 				CDD4493A2680C94000C150CF /* SceneDelegate.swift in Sources */,
+				CDD4494E2680D44F00C150CF /* Card.swift in Sources */,
+				CDA620A72681BDC200A69030 /* ButtonHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
